@@ -6,46 +6,11 @@ function ListNode(val, next) {
          this.next = (next===undefined ? null : next)
      }
 
-function findLast(list){
-    if (list.next===null){
-        return list
-    }
-    let last = list.next
-    while(last.next!==null){
-        last = last.next
-    }
-    return last
-}
-
-function findLength(list){
-    if (list.next===null){
-        return 1
-    }
-    let count =2
-    let last = list.next
-    while(last.next!==null){
-        last = last.next
-        count++
-    }
-    return count
-}
-
-function addNode(list, node){
-
-    if (typeof(node)==='number'){
-        node = new ListNode(node)
-    }
-    let last = findLast(list)
-    if (last!==null){
-        last.next=node
-    }
-    return list
-}
-
-
-
 
 function createList(arr){
+    if (arr.length===0){
+        return null
+    }
     let h = new ListNode(arr[0])
 
     for (let i=1;i<arr.length;i++){
@@ -54,6 +19,21 @@ function createList(arr){
     }
     return h
 }
+
+function readList(list){
+    if (list===null){
+        return []
+    }
+    let node = list
+    let vals = []
+    while (node!==null){
+        vals.push(node.val)
+        node = node.next
+    }
+    return vals
+}
+
+///////////////////////////////////////////////////
 
 function readVal(list, ind){
     let node = getSubNode(list, ind)
@@ -65,7 +45,7 @@ function getSubNode(list, ind){
     let i=0
     for (i=0;i<ind;i++){  
         if (node.next===null){
-            console.log(`No index ${ind} for list of length ${i+1}`)
+            // console.log(`No index ${ind} for list of length ${i+1}`)
             return null
         } else {
             node = node.next
@@ -76,19 +56,63 @@ function getSubNode(list, ind){
     return node
 }
 
-function readList(list){
-    let node = list
-    let vals = []
-    while (node!==null){
-        vals.push(node.val)
-        node = node.next
+function addNode(list, node){
+
+    if (node===null){
+        return list
     }
-    return vals
+
+    if (typeof(node)==='number'){
+        node = new ListNode(node)
+    }
+    let last = findLast(list)
+    if (last!==null){
+        last.next=node
+    }
+    return list
+}
+
+function findLast(list){
+    if (list === null){
+        return null
+    }
+    if (list.next===null){
+        return list
+    }
+    let last = list.next
+    while(last.next!==null){
+        last = last.next
+    }
+    return last
+}
+
+function findLength(list){
+    if (list === null){
+        return 0
+    }
+    if (list.next===null){
+        return 1
+    }
+    let count = 2
+    let last = list.next
+    while(last.next!==null){
+        last = last.next
+        count++
+    }
+    return count
 }
 
 
+
+
 function mergeTwoLists(l1,l2){
-    let N = 2*Math.min(findLength(l1),findLength(l2))
+    if (l1===null){
+        return l2
+    }
+    if (l2===null){
+        return l1
+    }
+    let N = findLength(l1)+findLength(l2)
 
     let i=0;
     let j=0
@@ -114,6 +138,7 @@ function mergeTwoLists(l1,l2){
             j++
         } else{
             addNode(res,a)
+            addNode(res,b)
             i++
             j++
 
@@ -124,11 +149,13 @@ function mergeTwoLists(l1,l2){
 }
 
 
-let l1 = createList([1,2,4])
-let l2 = createList([1,3,4])
+let l1 = createList([5])
+let l2 = createList([1,2,4])
 
 let res = mergeTwoLists(l1,l2)
 console.log(readList(res))
+
+
 
 
 
