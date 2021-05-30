@@ -17,6 +17,19 @@ function findLast(list){
     return last
 }
 
+function findLength(list){
+    if (list.next===null){
+        return 1
+    }
+    let count =2
+    let last = list.next
+    while(last.next!==null){
+        last = last.next
+        count++
+    }
+    return count
+}
+
 function addNode(list, node){
 
     if (typeof(node)==='number'){
@@ -43,19 +56,6 @@ function createList(arr){
 }
 
 function readVal(list, ind){
-    // let node = list
-    // let i=0
-    // for (i=0;i<ind;i++){  
-    //     if (node.next===null){
-    //         console.log(`No index ${ind} for list of length ${i+1}`)
-    //         return null
-    //     } else {
-    //         node = node.next
-    //     }
-       
-    // }
-
-    // return node.val
     let node = getSubNode(list, ind)
     return node === null ? null : node.val
 }
@@ -86,45 +86,51 @@ function readList(list){
     return vals
 }
 
-let l1 = createList([1,2,5,8])
-let l2 = createList([3,4,9,11])
-console.log(readList(l1))
-console.log(readList(l2))
 
+function mergeTwoLists(l1,l2){
+    let N = 2*Math.min(findLength(l1),findLength(l2))
 
-let i=0;
-let j=0
-let res = new ListNode("head")
-for(m=0;m<7;m++){
-    let a= readVal(l1,i)
-    let b= readVal(l2,j)  
-    if (a===null){
-           addNode(res,getSubNode(l2,j))
-           break
+    let i=0;
+    let j=0
+    let res = new ListNode("head")
+    for(m=0;m<N;m++){
+        let a= readVal(l1,i)
+        let b= readVal(l2,j)  
+        if (a===null){
+            addNode(res,getSubNode(l2,j))
+            return res.next
 
-    } 
-    if (b===null){
-           addNode(res,getSubNode(l1,j))
-           break
-    } 
-    if(a<b){
-        addNode(res,a)
-        i++
+        } 
+        if (b===null){
+            addNode(res,getSubNode(l1,i))
+            return res.next
+        } 
+        if(a<b){
+            addNode(res,a)
+            i++
+        }
+        else if(a>b){
+            addNode(res,b)
+            j++
+        } else{
+            addNode(res,a)
+            i++
+            j++
+
+        }
     }
-    else if(a>b){
-        addNode(res,b)
-        j++
-    } else{
-        addNode(res,a)
-        i++
-        j++
+    return res.next
 
-    }
 }
 
-console.log(readList(res.next))
 
-console.log(readVal(l1,4)===null)
+let l1 = createList([1,2,4])
+let l2 = createList([1,3,4])
+
+let res = mergeTwoLists(l1,l2)
+console.log(readList(res))
+
+
 
 
 
