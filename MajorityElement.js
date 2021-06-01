@@ -21,6 +21,9 @@ function MajorityElement(arr){
 nums = [3,2,3]
 // console.log(MajorityElement(nums))
 
+
+///Better O(n) implementation
+
 let freqs = new Map
 for (el of nums){
     if (freqs.has(el)){
