@@ -37,10 +37,10 @@ function twoSum(nums, target) {
         let partnerIndex = partners.indexOf(partner)
         //this leads to a problem if partner and key have the same numerical value, since then indexOf will give the same  value so
         partnerIndex = partnerIndex === keyIndex ? partnerIndex=nums.indexOf(partner,partnerIndex+1) : partnerIndex
-        if (key+partner===target && partnerIndex!==-1 && keyIndex!==partnerIndex){
+        if (key+partner===target && partnerIndex!==-1){
             return [keyIndex, partnerIndex]
         }
     }
 }
 ///////fix the following
-console.log(twoSum([3,3],6))
+console.log(twoSum([3,5,3,10,3],6))
