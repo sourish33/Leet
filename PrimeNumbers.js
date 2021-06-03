@@ -3,7 +3,7 @@
 
 function generateInts(n){
     let ints=[]
-    for (let count=3;count<n+1;count++){
+    for (let count=3;count<n;count++){
         ints.push(count)
     }
     return ints
@@ -19,35 +19,32 @@ function subtractArrays(m, n){
 
 function generateMultiples(base, lim){
     let mults = []
-    let n =1
+    let n =0
     let mult = 0
     while(mult<=lim){
-        mult = n*base
+        mult = base*base+n*base
         mults.push(mult)
         n++
     }
     return mults
 }
 
-let n=37
-
-
-// console.log(primes)
-
 
 function countPrimes(n){
+    if (n<3){
+        return 0
+    }
     let primes = []
     let intArray = generateInts(n)
     primes.push(2)
 
-    while (intArray.length>0){
+    while (primes[primes.length-1]*primes[primes.length-1]<n){
         let pMults = generateMultiples(primes[primes.length-1],n)
         intArray = subtractArrays(intArray, pMults)
-        console.log(primes)
-        console.log(intArray)
         primes.push(intArray.shift())
     }
-    return primes
+    primes = primes.concat(intArray)
+    return primes.length
 }
 
-console.log(countPrimes(20))
+console.log(countPrimes(49979))
