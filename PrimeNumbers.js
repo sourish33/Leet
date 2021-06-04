@@ -6,10 +6,10 @@ function countPrimes(n){
     if (n<3){
         return []
     }
-    let spots = Array(n).fill(true)
-    spots[0]=false
-    spots[1]=false
-    spots[2]=false
+    let sieve = Array(n).fill(true)
+    sieve[0]=false
+    sieve[1]=false
+    sieve[2]=false
 
     let primes = [2]
     let lastPrime = 2
@@ -18,22 +18,22 @@ function countPrimes(n){
     while(lastPrime*lastPrime<=n){
         let i=1
         while (lastPrime*i<=n){
-            spots[lastPrime*i]=false
+            sieve[lastPrime*i]=false
             i++
         }
-        nextPrime = spots.indexOf(true)
+        nextPrime = sieve.indexOf(true)
         primes.push(nextPrime)
         lastPrime = primes[primes.length-1]
-        spots[nextPrime]=false
+        sieve[nextPrime]=false
         }
         // console.log(primes)
-        // console.log(spots)
-    let remainders=[...spots.keys()].filter((el)=>spots[el])
+        // console.log(sieve)
+    let remainders=[...sieve.keys()].filter((el)=>sieve[el])
     primes = primes.concat(remainders)
     return primes
 }
 
-console.log(countPrimes(49))
+console.log(countPrimes(10))
 
 
 
