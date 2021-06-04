@@ -4,36 +4,28 @@
 
 function countPrimes(n){
     if (n<3){
-        return []
+        return 0
     }
     let sieve = Array(n).fill(true)
     sieve[0]=false
     sieve[1]=false
-    sieve[2]=false
-
-    let primes = [2]
-    let lastPrime = 2
 
 
-    while(lastPrime*lastPrime<=n){
-        let i=1
-        while (lastPrime*i<=n){
-            sieve[lastPrime*i]=false
-            i++
+  
+    for(let j=2; j*j<n;j++){
+
+        if (sieve[j]){
+          for (let m=0;j*j+m*j<n; m++){
+            sieve[j*j+m*j] = false
+          }
         }
-        nextPrime = sieve.indexOf(true,lastPrime)
-        primes.push(nextPrime)
-        lastPrime = nextPrime
-        sieve[nextPrime]=false
-        }
-        // console.log(primes)
-        // console.log(sieve)
-    let remainders=[...sieve.keys()].filter((el)=>sieve[el])
-    primes = primes.concat(remainders)
-    return primes
+  
+      }
+    let primes=[...sieve.keys()].filter((el)=>sieve[el])
+    return primes.length
 }
 
-console.log(countPrimes(53))
+console.log(countPrimes(20))
 
 
 
