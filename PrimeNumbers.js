@@ -23,7 +23,7 @@ function countPrimes(n){
         }
         nextPrime = sieve.indexOf(true)
         primes.push(nextPrime)
-        lastPrime = primes[primes.length-1]
+        lastPrime = nextPrime
         sieve[nextPrime]=false
         }
         // console.log(primes)
