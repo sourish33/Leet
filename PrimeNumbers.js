@@ -1,26 +1,30 @@
-let n =10
-let spots = Array(n+1).fill(1)
-spots[0]=0
-spots[1]=0
+let n =3
+let spots = Array(n).fill(true)
+spots[0]=false
+spots[1]=false
 
 let primes = []
-primes.push(spots.indexOf(1))
+let nextPrime = spots.indexOf(true)
+primes.push(spots.indexOf(true))
 let lastPrime = primes[primes.length-1]
+spots[nextPrime]=false
 
 
 
-while(lastPrime*lastPrime<n){
+while(lastPrime*lastPrime<=n){
     let i=1
     while (lastPrime*i<=n){
-        spots[lastPrime*i]=0
+        spots[lastPrime*i]=false
         i++
     }
-    nextPrime = spots.indexOf(1)
+    nextPrime = spots.indexOf(true)
     primes.push(nextPrime)
     lastPrime = primes[primes.length-1]
-    spots[nextPrime]=0
+    spots[nextPrime]=false
     }
-let remainders=[...spots.keys()].filter((el)=>spots[el]===1)
+    console.log(primes)
+    console.log(spots)
+let remainders=[...spots.keys()].filter((el)=>spots[el])
 primes = primes.concat(remainders)
 console.log(primes)
 
