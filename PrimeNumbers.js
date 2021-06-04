@@ -1,4 +1,4 @@
-let n =5
+let n =10
 let spots = Array(n).fill(true)
 spots[0]=false
 spots[1]=false
@@ -19,11 +19,14 @@ while(lastPrime*lastPrime<=n){
     lastPrime = primes[primes.length-1]
     spots[nextPrime]=false
     }
-    console.log(primes)
-    console.log(spots)
+    // console.log(primes)
+    // console.log(spots)
 let remainders=[...spots.keys()].filter((el)=>spots[el])
 primes = primes.concat(remainders)
 console.log(primes)
+
+
+
 
 
 
