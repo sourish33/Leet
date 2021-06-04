@@ -1,4 +1,4 @@
-let n =10
+
 
 //console.log(primes)
 
@@ -21,7 +21,7 @@ function countPrimes(n){
             sieve[lastPrime*i]=false
             i++
         }
-        nextPrime = sieve.indexOf(true)
+        nextPrime = sieve.indexOf(true,lastPrime)
         primes.push(nextPrime)
         lastPrime = nextPrime
         sieve[nextPrime]=false
@@ -33,7 +33,7 @@ function countPrimes(n){
     return primes
 }
 
-console.log(countPrimes(10))
+console.log(countPrimes(53))
 
 
 
