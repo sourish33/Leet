@@ -1,14 +1,11 @@
-let n =3
+let n =5
 let spots = Array(n).fill(true)
 spots[0]=false
 spots[1]=false
+spots[2]=false
 
-let primes = []
-let nextPrime = spots.indexOf(true)
-primes.push(spots.indexOf(true))
-let lastPrime = primes[primes.length-1]
-spots[nextPrime]=false
-
+let primes = [2]
+let lastPrime = 2
 
 
 while(lastPrime*lastPrime<=n){
